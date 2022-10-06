@@ -1,7 +1,8 @@
 /output
 /models
 /results
-/datasets
 /wandb
 /stablezoom
 /stable-noise
+
+/datasets/jams-germs
