@@ -1,14 +1,20 @@
 
 json = require 'json'
 
+f16 = love.graphics.newFont(16)
+f20 = love.graphics.newFont(20)
+
 function love.load()
 	ssx, ssy = love.graphics.getDimensions()
-	love.graphics.setFont(love.graphics.newFont(16))
 
 	frameFolder = 'jams-germs/frames/Buttercup the Water Bear Sees a Giant Amoeba'
 	trackFilepath = 'track-buttercup.json'
 	
 	numFrames = 8331
+	-- frameFolder = ''
+	-- trackFilepath = 'track-rotifer.json'
+	-- numFrames = 1
+
 	frameNum = 0
 	loadFrame()
 
@@ -180,13 +186,20 @@ function love.draw()
 		love.graphics.setColor(0.3, 0.3, 0.8, 0.2)
 		love.graphics.circle('fill', x, y, 9)
 		love.graphics.setColor(0, 0, 0)
-		love.graphics.circle('line', x, y, 3)
 		love.graphics.circle('line', x, y, 9)
+		love.graphics.setColor(1, 1, 1, 0.6)
+		love.graphics.circle('fill', x, y, 3)
+		love.graphics.setColor(0, 0, 0)
+		love.graphics.circle('line', x, y, 3)
 		local name = k
 		if name == 'world' and jumpSet[frameNum + 1] then
 			name = name .. ' (jump frame)'
 		end
-		love.graphics.print(name, x + 16, y - 12)
+		love.graphics.setColor(0.3, 0.3, 0.8, 0.5)
+		love.graphics.rectangle('fill', x + 12, y - 16, f20:getWidth(name) + 8, 24)
+		love.graphics.setColor(1, 1, 1)
+		love.graphics.setFont(f20)
+		love.graphics.print(name, x + 16, y - 16)
 	end
 
 	-- timeline
@@ -198,6 +211,7 @@ function love.draw()
 	-- controls
 	if showControls then
 		love.graphics.setColor(0, 0, 0)
+		love.graphics.setFont(f16)
 		love.graphics.print(
 			'Controls: (toggle visibility with "?")\n'
 			.. 'Click and drag to scrub the timeline\n'
