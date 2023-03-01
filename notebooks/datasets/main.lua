@@ -7,13 +7,10 @@ f20 = love.graphics.newFont(20)
 function love.load()
 	ssx, ssy = love.graphics.getDimensions()
 
-	frameFolder = 'jams-germs/frames/Buttercup the Water Bear Sees a Giant Amoeba'
-	trackFilepath = 'track-buttercup.json'
+	frameFolder = 'microscope/micro1/processed_frames'
+	trackFilepath = 'track-micro1.json'
 	
-	numFrames = 8331
-	-- frameFolder = ''
-	-- trackFilepath = 'track-rotifer.json'
-	-- numFrames = 1
+	numFrames = 9413
 
 	frameNum = 0
 	loadFrame()
@@ -46,7 +43,10 @@ function love.load()
 end
 
 function loadFrame()
-	frameImg = love.graphics.newImage(frameFolder .. '/' .. frameNum .. '.jpg')
+	framePath = frameFolder .. '/' .. frameNum .. '.jpg'
+	if love.filesystem.getInfo(framePath) ~= nil then
+		frameImg = love.graphics.newImage(framePath)
+	end
 end
 
 function loadJumpSet()
